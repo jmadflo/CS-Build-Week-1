@@ -8,6 +8,7 @@ const GameBoard = props => {
             boardCopy[i][j] = props.board[i][j] === 1 ? 0 : 1
         })
         props.setBoard(newBoard)
+        console.log(props.board)
     }
 
     return (
