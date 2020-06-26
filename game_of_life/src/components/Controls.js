@@ -20,7 +20,7 @@ const Controls = props => {
         props.setIsRunning(false)
         await props.setRowNum(35)
         await props.setColNum(35)
-        props.resetForm()
+        props.resetDimensions()
         props.setCurrentGeneration(0)
         props.setBoard(templates.oscillators)
     }
@@ -29,7 +29,7 @@ const Controls = props => {
         props.setIsRunning(false)
         await props.setRowNum(35)
         await props.setColNum(35)
-        props.resetForm()
+        props.resetDimensions()
         props.setCurrentGeneration(0)
         props.setBoard(templates.spaceships)
     }

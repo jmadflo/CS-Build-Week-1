@@ -4,7 +4,7 @@ import { Square, Grid } from './styled-components'
 
 const GameBoard = props => {
     const toggleValue = (i, j) => {
-        if (!props.isRunning){
+        if (!props.isRunning && (i > 0 && i < props.rowNum - 1) && (j > 0 && j < props.colNum - 1)){
             const newBoard = produce(props.board, boardCopy => {
                 boardCopy[i][j] = props.board[i][j] === 1 ? 0 : 1
             })

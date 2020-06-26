@@ -32,4 +32,13 @@ a {
 
 a:hover {
   transform: scale(1.1, 1.1);
+  text-decoration: underline;
+}
+
+.dimension {
+  margin-bottom: 5px;
+}
+
+.speed-input {
+  margin-top: 50px;
 }
