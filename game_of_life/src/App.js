@@ -5,15 +5,18 @@ import GameBoard from './components/GameBoard'
 import Controls from './components/Controls'
 import CustomizeForm from './components/CustomizeForm'
 import { GameContainer } from './components/styled-components'
+import NavBar from './components/NavBar'
 
 function App() {
   const [rowNum, setRowNum] = useState(35)
   const rowNumRef = useRef(rowNum)
   rowNumRef.current = rowNum
-  
+
   const [colNum, setColNum] = useState(35)
   const colNumRef = useRef(colNum)
   colNumRef.current = colNum
+
+  const [currentGeneration, setCurrentGeneration] = useState(0)
 
   const initializeBoard = () => {
     const rows = []
@@ -21,6 +24,7 @@ function App() {
     for (let i = 0; i < parseInt(rowNumRef.current); i++){
       rows.push(Array.from(Array(parseInt(colNumRef.current)), () => 0))
     }
+    setCurrentGeneration(0)
     return rows
   }
 
@@ -69,7 +73,10 @@ function App() {
         }
       })
     })
-    setTimeout(runGame, 200)
+    setCurrentGeneration(prevGeneration => {
+      return prevGeneration + 1
+    })
+    setTimeout(runGame, 100)
   }
 
   const [formValues, setFormValues] = useState({
@@ -86,13 +93,22 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Conway's Game of Life</h1>
+      <NavBar />
       <h2>Implementation By Juan Madero</h2>
       <GameContainer>
-        <GameBoard board={board} setBoard={setBoard} rowNum={rowNum} colNum={colNum}/>
+        <GameBoard board={board} setBoard={setBoard} rowNum={rowNum} colNum={colNum} isRunning={isRunning}/>
         <CustomizeForm isRunning={isRunning} setIsRunning={setIsRunning} rowNum={rowNum} colNum={colNum} setRowNum={setRowNum} setColNum={setColNum} setBoard={setBoard} initializeBoard={initializeBoard} formValues={formValues} setFormValues={setFormValues}/>
       </GameContainer>
-      <Controls isRunning={isRunning} setIsRunning={setIsRunning} runGame={runGame} resetForm={resetForm} setBoard={setBoard} initializeBoard={initializeBoard} randomize={randomize} runRef={isRunningRef} setRowNum={setRowNum} setColNum={setColNum}/>
+      <p>{`Current Generation: ${currentGeneration}`}</p>
+      <Controls isRunning={isRunning} setIsRunning={setIsRunning} runGame={runGame} resetForm={resetForm} setBoard={setBoard} initializeBoard={initializeBoard} randomize={randomize} runRef={isRunningRef} setRowNum={setRowNum} setColNum={setColNum} setCurrentGeneration={setCurrentGeneration}/>
+      <h2 id="rules">The Rules</h2>
+      <ol>
+        <li>Live cells with 2 or 3 neighbors survive to the next generation.</li>
+        <li>Dead cells with 3 neighbors will become alive in the next generation.</li>
+        <li>All other cells will be dead in the next generation.</li>
+      </ol>
+      <h2>The Algorithm</h2>
+      <p>The algo</p>
     </div>
   )
 }

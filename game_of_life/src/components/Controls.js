@@ -21,6 +21,7 @@ const Controls = props => {
         await props.setRowNum(35)
         await props.setColNum(35)
         props.resetForm()
+        props.setCurrentGeneration(0)
         props.setBoard(templates.oscillators)
     }
 
@@ -29,11 +30,13 @@ const Controls = props => {
         await props.setRowNum(35)
         await props.setColNum(35)
         props.resetForm()
+        props.setCurrentGeneration(0)
         props.setBoard(templates.spaceships)
     }
 
     const randomizeBoard = () => {
         props.setIsRunning(false)
+        props.setCurrentGeneration(0)
         props.setBoard(props.randomize())
     }
     return (

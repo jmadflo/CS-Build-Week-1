@@ -2,6 +2,7 @@ import React from 'react'
 import { StyledButton } from './styled-components'
 
 const CustomizeForm = props => {
+    // updates the formValues
     const updateDimensions = event => {
         props.setIsRunning(false)
         props.setFormValues({
@@ -9,6 +10,7 @@ const CustomizeForm = props => {
             [event.target.name]: event.target.value
         })
     }
+    // makes changes to the dimensions of the board
     const applyChanges = async event => {
         event.preventDefault()
         if (!props.isRunning) {
@@ -27,21 +29,18 @@ const CustomizeForm = props => {
     }
     return (
         <form>
-            {/* <InputContainer> */}
+            <div>
                 <div>
-                    <div>
-                        <label htmlFor='rowQuantity'>Row Quantity</label>
-                    </div>
-                    <input id= 'rowQuantity' name='rowQuantity' value={props.formValues.rowQuantity} onChange={updateDimensions}/>
+                    <label htmlFor='rowQuantity'>Row Quantity</label>
                 </div>
+                <input id= 'rowQuantity' name='rowQuantity' value={props.formValues.rowQuantity} onChange={updateDimensions}/>
+            </div>
+            <div>
                 <div>
-                    <div>
-                        <label htmlFor='colQuantity'>Column Quantity</label>
-                    </div>
-                    <input id= 'colQuantity' name='colQuantity' value={props.formValues.colQuantity} onChange={updateDimensions}/>
+                    <label htmlFor='colQuantity'>Column Quantity</label>
                 </div>
-            {/* </InputContainer> */}
-            
+                <input id= 'colQuantity' name='colQuantity' value={props.formValues.colQuantity} onChange={updateDimensions}/>
+            </div>
             <StyledButton color='red' onClick={applyChanges}>Change Size</StyledButton>
         </form>
     )

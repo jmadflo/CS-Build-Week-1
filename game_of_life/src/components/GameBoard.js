@@ -4,10 +4,12 @@ import { Square, Grid } from './styled-components'
 
 const GameBoard = props => {
     const toggleValue = (i, j) => {
-        const newBoard = produce(props.board, boardCopy => {
-            boardCopy[i][j] = props.board[i][j] === 1 ? 0 : 1
-        })
-        props.setBoard(newBoard)
+        if (!props.isRunning){
+            const newBoard = produce(props.board, boardCopy => {
+                boardCopy[i][j] = props.board[i][j] === 1 ? 0 : 1
+            })
+            props.setBoard(newBoard)
+        }
     }
 
     return (
